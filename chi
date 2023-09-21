@@ -1,0 +1,101 @@
+ChainFlip commands
+
+1- sudo apt update && sudo apt upgrade -y
+2- apt install ufw -y 
+ufw allow ssh 
+ufw allow https 
+ufw allow http 
+ufw allow 30333
+ufw allow 8078
+ufw enable
+
+3- sudo mkdir -p /etc/apt/keyrings
+curl -fsSL repo.chainflip.io/keys/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/chainflip.gpg
+
+4- gpg --show-keys /etc/apt/keyrings/chainflip.gpg
+5- echo "deb [signed-by=/etc/apt/keyrings/chainflip.gpg] https://repo.chainflip.io/perseverance/ focal main" | sudo tee /etc/apt/sources.list.d/chainflip.list
+
+6- sudo apt-get update
+sudo apt-get install -y chainflip-cli chainflip-node chainflip-engine
+
+7- sudo mkdir /etc/chainflip/keys
+8- echo -n "ca530aec9e62857dd10a032de9298d91311daf96a130104815a256cfc2529aa2" |  sudo tee /etc/chainflip/keys/ethereum_key_file
+9- chainflip-node key generate
+
+10- SECRET_SEED=0xa17604135131dfb3e12db37ad1f6991d9445d7465a09dae131ed44257d624a27
+11- echo -n "${SECRET_SEED:2}" | sudo tee /etc/chainflip/keys/signing_key_file
+12- sudo chainflip-node key generate-node-key --file /etc/chainflip/keys/node_key_file
+13- cat /etc/chainflip/keys/node_key_file
+14- sudo chmod 600 /etc/chainflip/keys/ethereum_key_file
+sudo chmod 600 /etc/chainflip/keys/signing_key_file
+sudo chmod 600 /etc/chainflip/keys/node_key_file
+history -c
+
+15- sudo mkdir -p /etc/chainflip/config
+sudo nano /etc/chainflip/config/Default.toml
+
+16- # Default configurations for the CFE
+[node_p2p]
+node_key_file = "/etc/chainflip/keys/node_key_file"
+ip_address="54.38.106.132"
+port = "8078"
+
+[state_chain]
+ws_endpoint = "ws://127.0.0.1:9944"
+signing_key_file = "/etc/chainflip/keys/signing_key_file"
+
+[eth]
+# Ethereum RPC endpoints (websocket and http for redundancy).
+ws_node_endpoint = "wss://eth-goerli.g.alchemy.com/v2/wgG01gAJwceH9rgRkFgxCXMPbFh9ni-z"
+http_node_endpoint = "https://eth-goerli.g.alchemy.com/v2/wgG01gAJwceH9rgRkFgxCXMPbFh9ni-z"
+
+# Ethereum private key file path. This file should contain a hex-encoded private key.
+private_key_file = "/etc/chainflip/keys/ethereum_key_file"
+
+[signing]
+db_file = "/etc/chainflip/data.db"
+
+17- sudo systemctl start chainflip-node
+18- sudo systemctl status chainflip-node
+19- tail -f /var/log/chainflip-node.log
+
+agar sync shod , dasturate zir ro ejra konid:
+
+20- sudo systemctl start chainflip-engine
+21- sudo systemctl status chainflip-engine
+22- sudo systemctl enable chainflip-node
+23- sudo systemctl enable chainflip-engine
+24- tail -f /var/log/chainflip-engine.log
+25- logrotate
+26- sudo nano /etc/logrotate.d/chainflip
+
+27- /var/log/chainflip-*.log {
+  rotate 7
+  daily
+  dateext
+  dateformat -%Y-%m-%d
+  missingok
+  notifempty
+  copytruncate
+  nocompress
+}
+
+28- sudo chmod 644 /etc/logrotate.d/chainflip
+sudo chown root.root /etc/logrotate.d/chainflip
+
+29- sudo systemctl restart chainflip-engine
+30- tail -f /var/log/chainflip-engine.log
+31- sudo chainflip-cli \
+      --config-path /etc/chainflip/config/Default.toml \
+      register-account-role Validator
+
+32- sudo chainflip-cli \
+    --config-path /etc/chainflip/config/Default.toml \
+    activate
+
+33- sudo chainflip-cli \
+    --config-path /etc/chainflip/config/Default.toml rotate
+
+34- sudo chainflip-cli \
+    --config-path /etc/chainflip/config/Default.toml \
+    vanity-name torshi
