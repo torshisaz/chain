@@ -9,7 +9,7 @@ ufw allow 30333
 ufw allow 8078
 ufw enable
 3- sudo mkdir -p /etc/apt/keyrings
-curl -fsSL repo.chainflip.io/keys/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/chainflip.gpg
+curl -fsSL repo.chainflip.io/keys/g -o /etc/apt/keyrings/chainflip.gpg
 
 4- gpg --show-keys /etc/apt/keyrings/chainflip.gpg
 5- echo "deb [signed-by=/etc/apt/keyrings/chainflip.gpg] https://repo.chainflip.io/perseverance/ focal main" | sudo tee /etc/apt/sources.list.d/chainflip.list
