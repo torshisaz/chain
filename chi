@@ -1,5 +1,4 @@
 ChainFlip commands
-
 1- sudo apt update && sudo apt upgrade -y
 2- apt install ufw -y 
 ufw allow ssh 
