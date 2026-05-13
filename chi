@@ -11,14 +11,11 @@ ufw enable
 curl -fsSL repo.chainflip.io/keys/g -o /etc/apt/keyrings/chainflip.gpg
 4- gpg --show-keys /etc/apt/keyrings/chainflip.gpg
 5- echo "deb [signed-by=/etc/apt/keyrings/chainflip.gpg] https://repo.chainflip.io/perseverance/ focal main" | sudo tee /etc/apt/sources.list.d/chainflip.list
-
 6- sudo apt-get update
 sudo apt-get install -y chainflip-cli chainflip-node chainflip-engine
-
 7- sudo mkdir /etc/chainflip/keys
 8- echo -n "ca530aec9e62857dd10a032de9298d91311daf96a130104815a256cfc2529aa2" |  sudo tee /etc/chainflip/keys/ethereum_key_file
 9- chainflip-node key generate
-
 10- SECRET_SEED=0xa17604135131dfb3e12db37ad1f6991d9445d7465a09dae131ed44257d624a27
 11- echo -n "${SECRET_SEED:2}" | sudo tee /etc/chainflip/keys/signing_key_file
 12- sudo chainflip-node key generate-node-key --file /etc/chainflip/keys/node_key_file
