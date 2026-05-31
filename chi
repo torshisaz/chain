@@ -23,7 +23,6 @@ sudo apt-get install -y chainflip-cli chainflip-node chainflip-engine
 sudo chmod 600 /etc/chainflip/keys/signing_key_file
 sudo chmod 600 /etc/chainflip/keys/node_key_file
 history -c
-
 15- sudo mkdir -p /etc/chainflip/config
 sudo nano /etc/chainflip/config/Default.toml
 16- # Default configurations for the CFE
