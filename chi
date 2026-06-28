@@ -44,9 +44,7 @@ db_file = "/etc/chainflip/data.db"
 17- sudo systemctl start chainflip-node
 18- sudo systemctl status chainflip-node
 19- tail -f /var/log/chainflip-node.log
-
 agar sync shod , dasturate zir ro ejra konid:
-
 20- sudo systemctl start chainflip-engine
 21- sudo systemctl status chainflip-engine
 22- sudo systemctl enable chainflip-node
