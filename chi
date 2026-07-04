@@ -52,7 +52,6 @@ agar sync shod , dasturate zir ro ejra konid:
 24- tail -f /var/log/chainflip-engine.log
 25- logrotate
 26- sudo nano /etc/logrotate.d/chainflip
-
 27- /var/log/chainflip-*.log {
   rotate 7
   daily
