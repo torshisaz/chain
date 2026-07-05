@@ -37,7 +37,7 @@ signing_key_file = "/etc/chainflip/keys/signing_key_file"
 # Ethereum RPC endpoints (websocket and http for redundancy).
  = "wss://eth-goerli.g.alchemy.com/v2/wgG01gAJwceH9rgRkFgxCXMPbFh9ni-z"
 http_node_endpoint = "https://eth-goerli.g.alchemy.com/v2/wgG01gAJwceH9rgRkFgxCXMPbFh9ni-z"
-# Ethereum private key file path. This file should contain a hex-encoded private key.
+#  key file path. This file should contain a hex-encoded private key.
 private_key_file = "/etc/chainflip/keys/ethereum_key_file"
 [signing]
 db_file = "/etc/chainflip/data.db"
