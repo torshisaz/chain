@@ -62,7 +62,6 @@ agar sync shod , dasturate zir ro ejra konid:
   copytruncate
   nocompress
 }
-
 28- sudo chmod 644 /etc/logrotate.d/chainflip
 sudo chown root.root /etc/logrotate.d/chainflip
 
