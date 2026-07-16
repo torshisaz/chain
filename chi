@@ -73,7 +73,6 @@ sudo chown root.root /etc/logrotate.d/chainflip
 32- sudo chainflip-cli \
     --config-path /etc/chainflip/config/Default.toml \
     activate
-
 33- sudo chainflip-cli \
     --config-path /etc/chainflip/config/Default.toml rotate
 
